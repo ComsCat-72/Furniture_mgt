@@ -55,5 +55,5 @@ Route::middleware(['auth'])->group(function () {
             ->name("delete_furniture");
     });
 
-    Route::get('/furniture/report', [FurnitureController::class, 'generateReport'])->name('furniture.report');
+    Route::get('/furniture/report/txt', [FurnitureController::class, 'generateTxtReport'])->name('furniture.report.txt');
 });

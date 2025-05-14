@@ -216,6 +216,15 @@
             </div>
         </div>
 
+        <div class="flex justify-end mb-4 space-x-4">
+            <a href="{{ route('furniture.create') }}" class="px-4 py-2 bg-accent-green text-black rounded hover:bg-opacity-90 transition-all">
+                Add New Furniture
+            </a>
+            <a href="{{ route('furniture.report.txt') }}" class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-all">
+                Download TXT Report
+            </a>
+        </div>
+
         <div class="table-container">
             <table>
                 <thead>

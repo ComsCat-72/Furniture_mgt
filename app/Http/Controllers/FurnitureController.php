@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Furniture;
+use Illuminate\Support\Facades\Response;
 
 class FurnitureController extends Controller{
     
@@ -60,5 +61,30 @@ class FurnitureController extends Controller{
         }else {
             return view('home');
         }
+    }
+
+    public function generateTxtReport() {
+        $furniture = Furniture::all();
+        
+        // Prepare the content for the text file
+        $content = "Furniture Management System Report\n";
+        $content .= "Generated on: " . now()->format('Y-m-d H:i:s') . "\n\n";
+        $content .= "FURNITURE LIST:\n";
+        $content .= "----------------------------------------\n\n";
+        
+        foreach ($furniture as $item) {
+            $content .= "ID: " . $item->id . "\n";
+            $content .= "Furniture Name: " . $item->FurnitureName . "\n";
+            $content .= "Owner: " . $item->FurnitureOwnerName . "\n";
+            $content .= "Created: " . $item->created_at . "\n";
+            $content .= "----------------------------------------\n";
+        }
+        
+        // Create the response with the text content
+        $response = Response::make($content);
+        $response->header('Content-Type', 'text/plain');
+        $response->header('Content-Disposition', 'attachment; filename="furniture_report.txt"');
+        
+        return $response;
     }
 }
