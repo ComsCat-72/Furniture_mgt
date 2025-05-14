@@ -8,7 +8,7 @@
         :root {
             --glow-color: rgba(37, 255, 106, 0.15);
             --dark-bg: #0a0a0a;
-            --card-bg: #111111;
+            --card-bg: rgba(17, 17, 17, 0.7);
             --text-color: #e0e0e0;
             --accent-green: #25ff6a;
         }
@@ -21,9 +21,6 @@
             color: var(--text-color);
             position: relative;
             overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         /* Glow effect */
@@ -43,120 +40,145 @@
         .container {
             position: relative;
             z-index: 1;
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 20px;
-            width: 400px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 2rem;
         }
 
-        h2 {
-            color: var(--text-color);
+        .header {
             text-align: center;
             margin-bottom: 2rem;
-            font-size: 1.8rem;
-            font-weight: 600;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ffffff, var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(37, 255, 106, 0.3);
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        label {
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
             color: var(--text-color);
-            font-size: 0.875rem;
             font-weight: 500;
         }
 
-        input {
+        .form-input {
             width: 100%;
-            padding: 0.75rem 1rem;
-            background: var(--dark-bg);
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-color);
             font-size: 1rem;
-            transition: all 0.2s;
-            box-sizing: border-box;
+            transition: all 0.3s;
         }
 
-        input:focus {
+        .form-input:focus {
             outline: none;
             border-color: var(--accent-green);
-            box-shadow: 0 0 0 2px rgba(37, 255, 106, 0.1);
+            box-shadow: 0 0 0 2px rgba(37, 255, 106, 0.2);
         }
 
-        input::placeholder {
-            color: rgba(224, 224, 224, 0.4);
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        button {
-            width: 100%;
+        .submit-btn {
+            flex: 1;
             padding: 0.75rem;
             background: var(--accent-green);
             color: var(--dark-bg);
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            transition: all 0.3s;
         }
 
-        button:hover {
+        .submit-btn:hover {
+            opacity: 0.9;
             transform: translateY(-2px);
-            box-shadow: 0 0 20px var(--glow-color);
         }
 
-        button svg {
-            width: 1.25rem;
-            height: 1.25rem;
+        .cancel-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
         }
 
-        @media (max-width: 480px) {
+        .cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
             .container {
-                width: 90%;
-                margin: 1rem;
-                padding: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Update Furniture</h2>
-        <form action="{{ route('update_furniture', $data->FurnitureId ) }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="FurnitureName">Furniture Name</label>
-                <input type="text" id="FurnitureName" name="FurnitureName" value="{{ $data->FurnitureName }}" required>
-            </div>
+        <div class="header">
+            <h1 class="title">Update Furniture</h1>
+        </div>
 
-            <div class="form-group">
-                <label for="FurnitureOwnerName">Furniture Owner Name</label>
-                <input type="text" id="FurnitureOwnerName" name="FurnitureOwnerName" value="{{ $data->FurnitureOwnerName }}" required>
-            </div>
+        <div class="form-container">
+            <form action="{{ route('update_furniture', $data->FurnitureId) }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label class="form-label" for="FurnitureName">Furniture Name</label>
+                    <input type="text" class="form-input" id="FurnitureName" name="FurnitureName" value="{{ $data->FurnitureName }}" required>
+                </div>
 
-            <button type="submit">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-                </svg>
-                Update Furniture
-            </button>
-        </form>
+                <div class="form-group">
+                    <label class="form-label" for="FurnitureOwnerName">Owner Name</label>
+                    <input type="text" class="form-input" id="FurnitureOwnerName" name="FurnitureOwnerName" value="{{ $data->FurnitureOwnerName }}" required>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="submit-btn">Update Furniture</button>
+                    <a href="{{ route('all_furniture') }}" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

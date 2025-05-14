@@ -200,6 +200,65 @@
                 align-items: center;
             }
         }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .action-button:first-child {
+            background: var(--accent-green);
+            color: var(--dark-bg);
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .action-button:first-child:hover {
+            background: var(--accent-green);
+            opacity: 0.9;
+        }
+
+        .action-button svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+        }
+
+        .action-button span {
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .action-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -216,12 +275,18 @@
             </div>
         </div>
 
-        <div class="flex justify-end mb-4 space-x-4">
-            <a href="{{ route('furniture.create') }}" class="px-4 py-2 bg-accent-green text-black rounded hover:bg-opacity-90 transition-all">
-                Add New Furniture
+        <div class="button-container">
+            <a href="{{ route('add_page') }}" class="action-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+                <span>Add New Furniture</span>
             </a>
-            <a href="{{ route('furniture.report.txt') }}" class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-all">
-                Download TXT Report
+            <a href="{{ route('furniture.report.txt') }}" class="action-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span>Download Report</span>
             </a>
         </div>
 

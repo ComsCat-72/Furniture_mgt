@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Furniture - Furniture Manager</title>
+    <title>Add New Furniture</title>
     <style>
         :root {
             --glow-color: rgba(37, 255, 106, 0.15);
             --dark-bg: #0a0a0a;
-            --card-bg: #111111;
+            --card-bg: rgba(17, 17, 17, 0.7);
             --text-color: #e0e0e0;
             --accent-green: #25ff6a;
         }
@@ -37,54 +37,6 @@
             pointer-events: none;
         }
 
-        .navbar {
-            position: relative;
-            z-index: 10;
-            background: var(--card-bg);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-        }
-
-        .nav-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            background: rgba(37, 255, 106, 0.1);
-            color: var(--accent-green);
-        }
-
-        .nav-link.active {
-            background: var(--accent-green);
-            color: var(--dark-bg);
-        }
-
         .container {
             position: relative;
             z-index: 1;
@@ -93,127 +45,140 @@
             padding: 0 2rem;
         }
 
-        .form-container {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        h2 {
-            color: var(--text-color);
+        .header {
             text-align: center;
             margin-bottom: 2rem;
-            font-size: 1.8rem;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ffffff, var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(37, 255, 106, 0.3);
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
 
         .form-group {
             margin-bottom: 1.5rem;
         }
 
-        label {
+        .form-label {
             display: block;
             margin-bottom: 0.5rem;
             color: var(--text-color);
             font-weight: 500;
         }
 
-        input {
+        .form-input {
             width: 100%;
-            padding: 0.75rem 1rem;
-            background: var(--dark-bg);
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-color);
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
-        input:focus {
+        .form-input:focus {
             outline: none;
             border-color: var(--accent-green);
+            box-shadow: 0 0 0 2px rgba(37, 255, 106, 0.2);
         }
 
-        button {
-            width: 100%;
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .submit-btn {
+            flex: 1;
             padding: 0.75rem;
             background: var(--accent-green);
             color: var(--dark-bg);
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            transition: all 0.3s;
         }
 
-        button:hover {
+        .submit-btn:hover {
+            opacity: 0.9;
             transform: translateY(-2px);
-            box-shadow: 0 0 20px var(--glow-color);
         }
 
-        button svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
+        .cancel-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
-            .nav-content {
-                flex-direction: column;
-                gap: 1rem;
+            .container {
+                padding: 0 1rem;
             }
 
-            .nav-links {
+            .button-group {
                 flex-direction: column;
-                width: 100%;
-            }
-
-            .nav-link {
-                width: 100%;
-                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="{{ route('home') }}" class="nav-brand">FurnitureManager</a>
-            <div class="nav-links">
-                <a href="{{ route('home') }}" class="nav-link">Dashboard</a>
-                <a href="{{ route('all_furniture') }}" class="nav-link">View All</a>
-                
-            </div>
-        </div>
-    </nav>
-
     <div class="container">
-        <form class="form-container" action="{{ route('add') }}" method="post">
-            @csrf
-            <h2>Add New Furniture</h2>
+        <div class="header">
+            <h1 class="title">Add New Furniture</h1>
+        </div>
 
-            <div class="form-group">
-                <label for="FurnitureName">Furniture Name</label>
-                <input type="text" id="FurnitureName" name="FurnitureName" required>
-            </div>
+        <div class="form-container">
+            <form action="{{ route('add') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label class="form-label" for="FurnitureName">Furniture Name</label>
+                    <input type="text" class="form-input" id="FurnitureName" name="FurnitureName" required>
+                </div>
 
-            <div class="form-group">
-                <label for="FurnitureOwnerName">Furniture Owner Name</label>
-                <input type="text" id="FurnitureOwnerName" name="FurnitureOwnerName" required>
-            </div>
+                <div class="form-group">
+                    <label class="form-label" for="FurnitureOwnerName">Owner Name</label>
+                    <input type="text" class="form-input" id="FurnitureOwnerName" name="FurnitureOwnerName" required>
+                </div>
 
-            <button type="submit">
-                <svg viewBox="0 0 24 24">
-                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                </svg>
-                Add Furniture
-            </button>
-        </form>
+                <div class="button-group">
+                    <button type="submit" class="submit-btn">Add Furniture</button>
+                    <a href="{{ route('all_furniture') }}" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
