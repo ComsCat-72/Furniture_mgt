@@ -10,8 +10,8 @@ class Furniture extends Model
     use HasFactory;
 
     protected $fillable = ['FurnitureName','FurnitureOwnerName'];
-    protected $table = 'furniture'; // Specify the table name
+    protected $table = 'Furniture'; // Updated to match migration case
     protected $primaryKey = 'FurnitureId'; // Specify the primary key column
-    public $incrementing = true; // Ensure the primary key is auto-incrementing
-    protected $keyType = 'int'; // Specify the type of the primary key
+    public $incrementing = true;
+    protected $keyType = 'int'; 
 }

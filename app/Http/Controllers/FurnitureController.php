@@ -61,5 +61,4 @@ class FurnitureController extends Controller{
             return view('home');
         }
     }
-
 }
